@@ -41,8 +41,8 @@
 - **版本表示：**
   - **相对表示：** 在 Git 中，用 `HEAD` 表示当前版本，也就是最新的提交。上一个版本就是 `HEAD^`，上上一个版本就是 `HEAD^^`，也可以用数字表示，例如往上 100 个版本写成 `HEAD~100`。
   - **绝对表示：** 也可以用 commit id 表示版本号。commit id 是一个 SHA1 计算出的十六进制字符串，唯一地标记这个 commit。使用时无需写全，可以只用前缀表示，确保无歧义即可。
-- **查看日志： **`git log` 命令显示从最近到最远的提交日志，`--pretty=oneline`  参数使其一行显示一个。
-- **查看历史命令： **`git reflog` 显示历史的每一次命令。可以找到某个想要去的版本的 commit id。
+- **查看日志：** `git log` 命令显示从最近到最远的提交日志，`--pretty=oneline`  参数使其一行显示一个。
+- **查看历史命令：** `git reflog` 显示历史的每一次命令。可以找到某个想要去的版本的 commit id。
 - **版本回退：** `git reset --hard HEAD^` 命令可以回退版本。也可以回退后用版本号回到新的版本。
 - **撤销修改：**
   - **撤销暂存区的修改：** `git reset HEAD <file>` 可以把暂存区的修改撤销（Unstage），重新放回工作区。
@@ -84,18 +84,18 @@
     - **Fast forward 模式：** 通常合并分支时 Git 会用 Fast forward 模式，但这种模式下删除分支后会丢掉分支信息。
     - **普通模式：** 强制禁用 Fast forward 模式，Git 会在 merge 时生成一个新的 commit，可以记录分支信息。`git merge --no-ff -m "merge with no-ff" dev`。
 - **推送分支：** `git push origin dev`。如果推送失败，先用 `git pull` 抓取远程的新提交。
-- **创建和远程分支对应的分支： **`git checkout -b dev origin/dev`。相当于创建分支+链接分支。
-- **链接分支： **`git branch --set-upstream-to=origin/dev dev`，指定本地创建的 dev 分支和远程 origin/dev 分支链接。
+- **创建和远程分支对应的分支：** `git checkout -b dev origin/dev`。相当于创建分支+链接分支。
+- **链接分支： ** `git branch --set-upstream-to=origin/dev dev`，指定本地创建的 dev 分支和远程 origin/dev 分支链接。
 - **删除分支：** `git branch -d dev`。
 
 ### 其他应用
 
 - **暂存工作现场：** `git stash` 暂存工作现场，方便临时突然开始进行短期的紧急更改。
-- **恢复工作现场： **`git stash list` 查看列表，`git stash pop` 恢复并删除，相当于两条命令：
-  - **恢复： **`git stash apply`，也可以恢复指定的 stash：`git stash apply stash@{0}`。`pop` 同理。
-  - **删除： **`git stash drop`，亦可删除指定的 stash。
+- **恢复工作现场： ** `git stash list` 查看列表，`git stash pop` 恢复并删除，相当于两条命令：
+  - **恢复： ** `git stash apply`，也可以恢复指定的 stash：`git stash apply stash@{0}`。`pop` 同理。
+  - **删除： ** `git stash drop`，亦可删除指定的 stash。
 - **Cherry Pick：** `git cherry-pick 4c805e2`，将（其他分支上）特定的 commit 复制到当前分支。
-- **Rebase： **`git rebase`，把树状图中分叉的历史提交合并为一条线。使更为易读。
+- **Rebase： ** `git rebase`，把树状图中分叉的历史提交合并为一条线。使更为易读。
 
 ## 标签 Tag 管理
 
@@ -107,7 +107,7 @@
   - 标签总是和某个 commit 挂钩。如果这个 commit 出现在多个分支，这些分支上都可以看到这个标签。
 - **查看所有标签：** `git tag`。标签不是按时间顺序列出，而是按字母排序的。
 - **查看标签信息：** `git show <tagname>`。
-- **删除标签： ** `git tag -d <tagname>`。
+- **删除标签：** `git tag -d <tagname>`。
 - **推送标签到远程：** `git push origin <tagname>`。一次性推送全部可以用 `git push origin --tags`。
 - **删除远程标签：** 先在本地删除，然后 `git push origin :refs/tags/<tagname>`。
 
