@@ -117,6 +117,7 @@
 
 - 每个 git 仓库的配置文件都放在 `.git/config` 中。用户配置文件在 `~/.gitconfig`。
 - 配置时，加上 `--global` 表示配置对当前用户生效，否则对当前仓库生效。
+- 让 git 忽略文件权限检查：`git config --add core.filemode false`。
 
 ### 忽略文件 .gitignore
 
