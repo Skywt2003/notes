@@ -11,10 +11,13 @@
 - **编码。** HTML5 中默认的字符编码是 UTF-8。
 - **空格空行忽略。** 当显示页面时，浏览器会移除源代码中多余的空格和空行。所有连续的空格、空行都会被算作一个空格。
 - **大小写不敏感。** 但是推荐使用小写。
+- **文件路径：** 与 Linux 系统文件路径逻辑类似，`..` 代表上层文件夹，`/ ` 代表网站根目录，默认相对路径以当前文件位置始。亦可使用以 URL 表示的绝对文件路径。
 
-### 概念
+### 一些概念
 
 - **文档：** 就是页面。
+
+  - 推荐使用 `.html` 拓展名而不是 `.htm`。
 
   - 一个最基本的 HTML5 实例：
 
@@ -50,11 +53,51 @@
 
 
 
-## 标签
+## 标签 Tags
 
-### 块布局
+### 文档类型声明
 
+文章首行应声明文档类型：`<!DOCTYPE html>`。
 
+### 布局
+
+#### 块和内联
+
+- **块级元素（block）：** h1，p，ul，table 等，一般以新行开始。
+  - `<div>` 可以作为块级元素容器。
+- **内联元素（inline）：** b，td，a，img 等，通常不会以新的行开始。
+  - `<span> ` 可作为内联元素的容器。
+
+#### 头部
+
+HTML5 中 head 是可以省略的。默认把 body 之前的部分都认为是 head。
+
+- **头部容器 Head：** `<head>` 标签中包含脚本，样式表引用、元信息等。以下标签都可以添加到 `<head>`。
+- **标题 Title：** 定义文档的标题。
+- **Base：** 为页面上的所有链接规定默认地址或默认目标（target），如 `<base target="_blank" />`。
+- **Link：** 定义文档与外部资源之间的关系。`<link rel="stylesheet" type="text/css" href="style.css" />`。
+- **Style：** 定义一些样式信息。其中写 css 代码。
+- **Meta：** 提供关于 HTML 文档的元数据。一般用于搜索引擎索引等。**只能位于 `<head>` 容器中。**
+  - **页面描述：** `<meta name="description" content="Free Web tutorials on HTML, CSS, XML" />`。
+  - **关键词：** `<meta name="keywords" content="HTML, CSS, XML" />`。
+- **Script：** JavaScript 脚本或者外部脚本引用。
+
+#### HTML5 语义元素
+
+本质上是一些有特定功能的 div。
+
+- header：页眉。
+- nav：导航。
+- section：节。是有主题的内容组，通常具有标题。
+- article：文章。规定独立的自包含内容。文档有其自身的意义，并且可以独立于网站其他内容进行阅读。
+- main：文档的主内容。
+- aside：主要内容之外的内容（如侧栏）。
+- footer：页脚。
+- details：额外的细节。
+- summary：details 元素的标题。
+- time：包含日期和时间。
+- figure 和 figcaption：图片（或图表等其他内容）搭配标题。
+- mark：重要或者强调的文本。
 
 ### 注释
 
@@ -86,8 +129,10 @@
 
 #### 计算机输出
 
-- `<pre>` 定义预格式文本。`<code>` 定义计算机代码。
-- `<kbd>` 定义键盘码；`<samp>` 定义计算机代码样本；`<tt>` 定义打字机代码；`<var>` 定义变量。
+- `<pre>` 定义预格式文本。保留所有多余的空格和折行。
+- `<code>` 定义计算机代码。code 不会保留多余的空格和折行。
+- `<var>` 定义变量。可以用于数学公式。
+- `<kbd>` 定义键盘输入；`<samp>` 定义计算机输出；`<tt>` 定义打字机代码。
 
 #### 引用和术语定义
 
@@ -157,21 +202,24 @@
 
 ### 多媒体
 
-#### 链接
+#### a 链接
 
  `<a href="http://www.w3school.com.cn">link</a>`。
 
-- **Href 属性：** 定义链接目标。
-  - **末尾斜杠：** 应该在 URL 最后加上斜杠 `/`，否则会引起重定向。
-  - **邮件链接：** 将 `mailto:someone@microsoft.com?subject=Hello%20again` 作为一个 URL。
+- **Href 属性：** 定义链接目标。可以是一个 URL（页面）或者目标元素的标识符（位置）。
+  - **链接到 URL：**
+    - **末尾斜杠：** 应该在 URL 最后加上斜杠 `/`，否则会引起重定向。
+    - **邮件链接：** 将 `mailto:someone@microsoft.com?subject=Hello%20again` 作为一个 URL。
+  - **链接到锚：**
+    -  `<a name="tips">显示的文本</a>` 创立一个锚，`<a href="#tips">提示</a>` 创建指向其的链接。
+    - 如果浏览器找不到锚，则会跳到页面顶端。
+  - **链接到 URL 中的锚：** 也可以使用 URL+标识符的方式：`https://skywt.cn/index.html#tips`。
 - **Target 属性：** 定义被链接的文档在何处显示。
   - `target="_blank"` 使在新标签页打开文档。
   - `target="_top"` 跳出框架。
-- **Name 属性：** `<a name="tips">显示的文本</a>` 创立一个锚，`<a href="#tips">提示</a>` 创建指向其的链接。
-  - 如果浏览器找不到锚，则会跳到页面顶端。
-- **Id 属性：** 和 name 作用一样。
+  - `target="iframe_a"` 使链接在 name 为 iframe_a 的 iframe 中打开。
 
-#### 图像
+#### img 图像
 
  `<img src="w3school.jpg" width="104" height="142" />`
 
@@ -179,18 +227,54 @@
 - **Alt 属性：** 替换文本。
 - **Width 和 Height 属性：** 宽度和高度。
 
+##### figure 和 figcaption
 
+组合图片和图片的解释。figcaption 包含图片的解释（标题）文本。HTML5 的新语义标签。
+
+```html
+<figure>
+   <img src="pic_mountain.jpg" alt="The Pulpit Rock" width="304" height="228">
+   <figcaption>Fig1. - The Pulpit Pock, Norway.</figcaption>
+</figure> 
+```
+
+#### iframe 内联框架
+
+iframe 用于在网页内显示网页。
+
+- **Src、Width、Height 属性：** 同图像。
+- **Frameborder 属性：** 是否显示边框。设置为 0 则不显示边框。
+
+### JavaScript
+
+- `<script>` 标签中包含一段 JavaScript 代码。
+- `<noscript>` 标签中包含针对不支持 JavaScript 浏览器显示的替代内容。
 
 ## 属性
 
+此处为所有标签的一般属性。
+
+### id
+
+- HTML id 属性用于为 HTML 元素指定唯一的 id。
+- **大小写敏感。**
+- **不许重复。** 一个 HTML文档中不能存在多个有相同 id 的元素。
+- **调用语法：** `#idName`。
+
+### Name
 
 
-## 样式
+
+### Class 类
+
+设置标签的类，可以用 css 定义其不同样式。
+
+
+
+## 样式 Style
 
 - **颜色：** 仅有 16 种颜色名被 W3C 的 HTML 4.0 标准支持：aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow。其他颜色必须用十六进制颜色值表示。
 - **外部样式表：** `<link rel="stylesheet" type="text/css" href="mystyle.css">`
 - **内部样式表：** `<style type="text/css"></style>`
 - **内联样式：** `<p style="color: red; margin-left: 20px">`
-
-
 
