@@ -8,10 +8,9 @@
 
 ## 概念和语法
 
-- **注释：** 和 C++ 类似，包裹在 `/* */` 内。
-
 ### 语法
 
+- **注释：** 和 C++ 类似，包裹在 `/* */` 内。
 - **规则集 rule-set：** 由选择器和声明块组成。
 - **选择器：** 指向需要设置样式的 HTML 元素。
 - **声明块：** 一个大括号中包含一条或多条用分号分隔的声明。
@@ -19,42 +18,39 @@
 
 ### 单位
 
-- px：像素。设置绝对大小。
-- em：1em 等于当前字体大小，可以由用户调整。
-- vw：1vw 等于视口宽度（Viewport Width，即浏览器窗口大小）的 1%。
+- `px`：像素。设置绝对大小。
+- `em`：1em 等于当前字体大小，可以由用户调整。推荐使用的单位。
+- `vw`：1vw 等于视口宽度（Viewport Width，即浏览器窗口大小）的 1%。
 
 ### 颜色
 
-#### RGB 颜色
+- **RGB 颜色：**
 
-- 使用 `rgb(red, green, blue)` 指定颜色，每个参数定义了 0 到 255 之间的颜色强度。黑色为 0,0,0，白色为 255,255,255。
-- 使用 `rgba(red, green, blue, alpha)` 指定颜色，alpha 参数代表不透明度，介于 0 至 1.0 之间。
+  - 使用 `rgb(red, green, blue)` 指定颜色，每个参数定义了 0 到 255 之间的颜色强度。黑色为 0,0,0，白色为 255,255,255。
 
-#### HEX 颜色
+  - 使用 `rgba(red, green, blue, alpha)` 指定颜色，alpha 参数代表不透明度，介于 0 至 1.0 之间。
 
-- 使用十六进制代码 `#rrggbb` 指定颜色，每两位表示红、绿、蓝的强度。
+- **HEX 颜色：** 使用十六进制代码 `#rrggbb` 指定颜色，每两位表示红、绿、蓝的强度。
 
-#### HSL 颜色
+- **HSL 颜色：** 使用色相、饱和度和明度（HSL）来指定颜色：`hsl(hue, saturation, lightness)`。同样有 HSLA。
 
-- 使用色相、饱和度和明度（HSL）来指定颜色：`hsl(hue, saturation, lightness)`。
+  - **色相（hue）** 是色轮上从 0 到 360 的度数。0 是红色，120 是绿色，240 是蓝色。
 
-- 同样有 HSLA：`hsla(hue, saturation, lightness, alpha)`。
 
-  - **色相（hue）**是色轮上从 0 到 360 的度数。0 是红色，120 是绿色，240 是蓝色。
+  - **饱和度（saturation）** 是一个百分比值，可以看成颜色强度。0％ 是无颜色的灰色阴影，而 100％ 是全颜色。
 
-  - **饱和度（saturation）**是一个百分比值，可以看成颜色强度。0％ 是无颜色的灰色阴影，而 100％ 是全颜色。
 
-  - **亮度（lightness）**也是百分比，0％ 是黑色，50％ 是既不明也不暗，100％是白色。
+  - **亮度（lightness）** 也是百分比，0％ 是黑色，50％ 是既不明也不暗，100％是白色。
 
 ### 字体
 
 在 CSS 中，有五个通用字体族，所有不同的字体名称都属于这五个通用字体系列之一。
 
-- 衬线字体（Serif）
-- 无衬线字体（Sans-serif）
-- 等宽字体（Monospace）
-- 草书字体（Cursive）：模仿手写体。
-- 幻想字体（Fantasy）：装饰性/俏皮的字体。
+- **衬线字体（Serif）**
+- **无衬线字体（Sans-serif）**
+- **等宽字体（Monospace）**
+- **草书字体（Cursive）：** 模仿手写体。
+- **幻想字体（Fantasy）：** 装饰性/俏皮的字体。
 
 ## 布局
 
@@ -62,7 +58,7 @@
 
 从内向外：
 
-- **内容： ** 实际内容。大小由 `height/width` 控制。
+- **内容：** 实际内容。大小由 `height/width` 控制。
 - **内边距：** 清除内容周围的区域。内边距是透明的。
 - **边框：** 围绕内边距和内容的边框。边框以内内容才有背景。
 - **外边距：** 清除边界外的区域。外边距是透明的。
@@ -208,3 +204,73 @@
   - 默认情况下，如果 table、th、tb 都有自己的边框，表格会显示为双边框。
 - `border-collapse` 设为 `collapse` 则将表格双边框折叠为单一边框。
 
+
+
+
+
+## Flex
+
+### 基本概念
+
+- 轴 axis：存在主轴（main axis）和交叉轴（cross axis）。
+  - 默认主轴水平，交叉轴垂直。可以更改。
+- 单元块 flex item：主轴方向大小（main size）和交叉轴方向大小（cross size）。
+
+### 容器 container 属性
+
+- 设为 flex 容器：`display: flex | inline-flex;`
+
+#### flex-direction 主轴方向
+
+- `row|row-reverse|column|column-reverse` 分别是水平左起、水平右起、垂直上起、垂直下起。
+
+#### flex-wrap 折行方式
+
+- ` nowrap|wrap|wrap-reverse` 分别是不折行（所有内容压在一行）、折行、反向折行。
+
+#### flex-flow 简写上两者
+
+#### justify-content 主轴上对齐方式
+
+- `flex-start|flex-end|center|space-between|space-around` 分别是左对齐、右对齐、居中、两端对齐、均匀分布。
+
+#### align-items 交叉轴上对齐方式
+
+- `flex-start|flex-end|center|baseline|stretch` 分别是交叉轴起点对齐、终点对齐、中点对齐、首行文字基线对齐、填满。
+- 默认是 stretch。
+
+#### align-content 多轴线的对齐方式
+
+- 用于设置 wrap 之后产生的多根轴线的对齐方式。
+
+- `flex-start|flex-end|center|space-between|space-around|stretch` 和 align-items 类似。
+
+### 项目 item 属性
+
+#### order 序号
+
+- 设置序号。根据序号排列各项目。
+
+#### flex-basis 占据主轴空间
+
+- 设置数值。默认为 auto。
+- 设置该属性，项目的 width 或者 height（主轴方向的大小设置）会失效。
+
+#### flex-grow 放大因子
+
+- 设置数值，根据每根主轴所有该设置的比例调整大小布局。
+- 按照 flex-basis 排列仍然有剩余空间时才生效。
+
+#### flex-shrink 收缩因子
+
+- 设置数值，类似 flex-grow，但是无需剩余空间。
+
+#### flex 上三者简写
+
+- 依次是 flex-grow、flex-shrink、flex-basis。
+- 默认 auto：`1 1 auto`
+- none：`0 0 none`
+
+#### align-self 单项目特殊对齐方式
+
+- 内容和 align-items 一样。
