@@ -11,6 +11,9 @@
   * [Go](/Language/Go.md)
 * Application
   * [Git](/Application/Git.md)
-  * [Crontab](/Application/Crontab.md)
+  * [LaTeX](/Application/Latex.md)
+  * [Selenium](/Application/Selenium/md)
   * [Linux](/Application/Linux.md)
+  * [Nginx](/Application/Nginx.md)
+  * [Crontab](/Application/Crontab.md)
 
