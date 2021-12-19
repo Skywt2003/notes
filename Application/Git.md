@@ -4,8 +4,7 @@
 
 ## 基本介绍
 
-- Git 是最流行的分布式版本控制程序。
-- 开发 Linux 时，由于和免费向社区提供版本管理的 BitMover 公司闹翻，Linus 花了两周时间自己用 C 写了一个分布式版本控制系统，这就是 Git。
+Git 是最流行的分布式版本控制程序。
 
 ### 注意事项
 
@@ -29,12 +28,12 @@
 ## 基本用法
 
 - **创建仓库：** 进入一个目录，通过 `git init` 命令把这个目录变成 Git 可以管理的仓库。创建完成后，目录会出现 `.git` 隐藏目录。
-- **添加改动到仓库：** `git add <file>` 添加改动。将修改从 Untracked、Unstaged  状态添加到暂存区，成为 Staged 状态。
+- **添加改动到仓库：** `git add <file>` 添加改动。将修改从 Untracked、Unstaged 状态添加到暂存区，成为 Staged 状态。
   - **删除文件：** `git rm <file>`  使一个文件的删除改动暂存。其实效果和 `git add <file>` 一样。
   - **添加所有：** 使用 `-A` 参数来添加所有更改（包括删除）。
 - **提交文件到仓库：** `git commit -m <messsge>` 提交改动到某个分支。
 - **查看当前仓库状态：** `git status` 显示目前待提交的改动等信息。
-- **查看改动：** `git diff <file> `。
+- **查看文件改动：** `git diff <file> `。
 
 ## 版本控制
 
@@ -51,11 +50,14 @@
 ## 远程仓库
 
 - **克隆远程仓库：** `git clone git@github.com:michaelliao/gitskills.git `。
-- **关联远程仓库：** `git remote add origin https://github.com/Skywt2003/notes.git` 。关联一个远程库时必须给远程库指定一个名字，origin 是默认习惯命名。关联后，第一次推送使用 `git push -u origin master` 可以关联本地与远程的 master 分支。
-  - 克隆和关联支持多种协议，但是 ssh 最快。
+- **关联远程仓库：** `git remote add origin https://github.com/Skywt2003/notes.git` 。
+  - 关联一个远程库时必须给远程库指定一个名字，在本地标记这个关联的仓库。origin 是默认习惯命名。
+  - 关联后，第一次推送使用 `git push -u origin master` 可以关联本地与远程的 master 分支。
+  - 克隆和关联支持多种协议，但是 ssh 最快。	
+  
 - **查看远程库信息：** `git remote -v`。使用 `-v` 为显示更详细的信息。
 - **推送到远程：** `git push`。
-  - 使用 `git push origin master` 将推送 master 分支的修改。
+  - 使用 `git push origin master` 将推送 origin 仓库 master 分支的修改。
 - **从远程拉取：** `git pull`，需要当前分支与远程某个分支链接。可以用 `git branch --set-upstream-to=origin/dev dev` 链接。
 - **删除远程库：** `git remote rm <name>`。name 指的是仓库名（如 origin）。此处的「删除」其实是解除了本地和远程的绑定关系，并不是物理上删除了远程库。
 
@@ -132,3 +134,10 @@
 - **配置别名：** `git config --global alias.st status` 告诉 Git，以后用 st 表示 status。
 - **终端代理：** `git config --global http.proxy http://127.0.0.1:10800`，`git config --global https.proxy http://127.0.0.1:10800`。
 
+## 实践
+
+### Pull Request 实践
+
+- 增加一个 upstream：`git remote add upstream https://github/link/to/upstream`
+- 同步 upstream 的更改：`git fetch upstream`
+- 合并 upstream 与当前的 master：`git merge upstream/master origin/master`
