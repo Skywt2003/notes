@@ -123,6 +123,7 @@ document. A brief introduction about the main subject.
 
 - 另起一段：两段之间要隔开一行，即两个换行符新起一段。
 - 段内强制换行：`\\` 或者 `\newline`。
+- 无缩进：`\noindent`。
 
 #### 文字格式
 
@@ -186,6 +187,52 @@ document. A brief introduction about the main subject.
 - 垂直边框：由 `tabular` 中的 `|c|c|c|` 定义
 - 水平边框：行间使用 `\hline` 命令。可以使用多次。
 
+### 代码高亮
+
+需要使用 `minted` 包。
+
+在自己部署的 Overleaf 中，要先 apt 安装 pygments，再在 `/usr/local/texlive/2021/texmf.cnf` 中添加行 `shell_escape = t` 并重启容器，才能开启代码高亮。
+
+#### 可选参数
+
+- 边框 `frame`：`leftline/topline/bottomline/single/lines`，`lines` 是代码块上下分别加上分隔线。
+- 框架分隔 `framesep`。
+- 行高 `baselinestretch`。
+- 行号显示 `linenos`。
+
+#### 代码段
+
+```latex
+\begin{minted}{cpp}
+inline int read(){
+    return 0;
+}
+\end{minted}
+
+\begin{minted}[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+linenos
+]{cpp}
+inline int read(){
+    return 0;
+}
+\end{minted}
+```
+
+#### 单行代码
+
+```latex
+\mint{html}|<h2>Something <b>here</b></h2>|
+```
+
+#### 文件引入代码
+
+```latex
+\inputminted{octave}{test.cpp}
+```
+
 ### 浮动体
 
 #### 图片浮动体
@@ -217,5 +264,19 @@ document. A brief introduction about the main subject.
     \caption{Table to test captions and labels}
     \label{table:data}
 \end{table}
+
+\ref{table:data}
+```
+
+#### 代码块浮动体
+
+```latex
+\begin{listing}[!ht]
+	\inputminted{octave}{BitXorMatrix.m}
+	\caption{Example from external file}
+	\label{listing:code1}
+\end{listing}
+
+\ref{listing:code1}
 ```
 
